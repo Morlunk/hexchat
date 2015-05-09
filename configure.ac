@@ -192,7 +192,7 @@ dnl ** GTK **************************************************************
 dnl *********************************************************************
 
 AS_IF([test "$gtkfe" = yes], [
-	PKG_CHECK_MODULES(GTK, [gtk+-2.0 >= 2.24.0], [
+	PKG_CHECK_MODULES(GTK, [gtk+-3.0 >= 3.0], [
 		GUI_LIBS="$GUI_LIBS $GTK_LIBS"
 		GUI_CFLAGS="$GUI_CFLAGS $GTK_CFLAGS -DGDK_PIXBUF_DISABLE_SINGLE_INCLUDES -DGTK_DISABLE_SINGLE_INCLUDES -DGTK_DISABLE_DEPRECATED"
 	], [
