@@ -141,12 +141,12 @@ struct _GtkXText
 	int last_win_h;
 	int last_win_w;
 
-	GdkGC *bgc;						  /* backing pixmap */
-	GdkGC *fgc;						  /* text foreground color */
-	GdkGC *light_gc;				  /* sep bar */
-	GdkGC *dark_gc;
-	GdkGC *thin_gc;
-	GdkGC *marker_gc;
+	cairo_t *bgc;						  /* backing pixmap */
+	cairo_t *fgc;						  /* text foreground color */
+	cairo_t *light_gc;				  /* sep bar */
+	cairo_t *dark_gc;
+	cairo_t *thin_gc;
+	cairo_t *marker_gc;
 	GdkColor palette[XTEXT_COLS];
 
 	gint io_tag;					  /* for delayed refresh events */
@@ -258,7 +258,7 @@ void gtk_xtext_append_indent (xtext_buffer *buf,
 										unsigned char *right_text, int right_len,
 										time_t stamp);
 int gtk_xtext_set_font (GtkXText *xtext, char *name);
-void gtk_xtext_set_background (GtkXText * xtext, GdkPixmap * pixmap);
+void gtk_xtext_set_background (GtkXText * xtext, cairo_surface_t * pixmap);
 void gtk_xtext_set_palette (GtkXText * xtext, GdkColor palette[]);
 void gtk_xtext_clear (xtext_buffer *buf, int lines);
 void gtk_xtext_save (GtkXText * xtext, int fh);
