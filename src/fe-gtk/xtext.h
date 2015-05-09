@@ -129,8 +129,8 @@ struct _GtkXText
 	xtext_buffer *selection_buffer;
 
 	GtkAdjustment *adj;
-	GdkPixmap *pixmap;				/* 0 = use palette[19] */
-	GdkDrawable *draw_buf;			/* points to ->window */
+	cairo_surface_t *pixmap;				/* 0 = use palette[19] */
+	cairo_surface_t *draw_buf;			/* points to ->window */
 	GdkCursor *hand_cursor;
 	GdkCursor *resize_cursor;
 

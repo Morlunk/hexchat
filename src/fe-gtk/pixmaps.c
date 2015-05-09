@@ -47,26 +47,34 @@ GdkPixbuf *pix_tree_util;
 GdkPixbuf *pix_book;
 GdkPixbuf *pix_hexchat;
 
-static GdkPixmap *
+static cairo_surface_t *
 pixmap_load_from_file_real (char *file)
 {
 	GdkPixbuf *img;
-	GdkPixmap *pixmap;
+	cairo_surface_t *pixmap;
 
 	img = gdk_pixbuf_new_from_file (file, 0);
 	if (!img)
 		return NULL;
-	gdk_pixbuf_render_pixmap_and_mask (img, &pixmap, NULL, 128);
+
+        // GdkPixbufs are always RGB/RGBA.
+        cairo_format_t fmt = gdk_pixbuf_get_has_alpha(img) ?
+            CAIRO_FORMAT_ARGB32 : CAIRO_FORMAT_RGB24;
+        pixmap = cairo_image_surface_create_for_data(img->data, fmt,
+                gdk_pixbuf_get_width(img), gdk_pixbuf_get_height(img),
+                cairo_format_stride_for_width(format,
+                    gdk_pixbuf_get_width(img));
+
 	g_object_unref (img);
 
 	return pixmap;
 }
 
-GdkPixmap *
+cairo_surface_t *
 pixmap_load_from_file (char *filename)
 {
 	char buf[256];
-	GdkPixmap *pix;
+	cairo_surface_t *pix;
 
 	if (filename[0] == '\0')
 		return NULL;
